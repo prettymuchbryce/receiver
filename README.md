@@ -16,21 +16,23 @@
 
 2. `sudo npm install -g forever`
 
-3. `forever start yourapp.js`
+3. `git clone  http://www.github.com/you/yourapp`
 
-4. `git clone http://www.github.com/prettymuchbryce/receiver`
+4. `forever start yourapp.js`
 
-5. `cd receiver`
+5. `git clone http://www.github.com/prettymuchbryce/receiver`
 
-6. Edit receiver/config.json to specify the file system location of the git directories to pull.
+6. `cd receiver`
 
-7. `npm install`
+7. Edit receiver/config.json to specify the file system location of the git directories to pull.
 
-8. `forever start receiver/receiver.js`
+8. `npm install`
 
-9. Input receiver as a service hook in your github project. (Settings -> Service Hooks -> Webhook URLs)
+9. `forever start receiver/receiver.js`
+
+10. Input receiver as a service hook in your github project. (Settings -> Service Hooks -> Webhook URLs)
 
 	example: http://www.mywebapp.com:3617/gitpush
 
 
-10. Push to github to deploy.
+11. Push to github to deploy.
