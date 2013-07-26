@@ -18,7 +18,7 @@
 
 3. `git clone  http://www.github.com/you/yourapp`
 
-4. `forever start yourapp.js`
+4. `forever start yourapp/yourapp.js`
 
 5. `git clone http://www.github.com/prettymuchbryce/receiver`
 
