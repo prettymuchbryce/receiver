@@ -7,7 +7,7 @@ var exec = require('child_process').exec;
 var command = constructCommand();
 
 app.post(config.endpoint, function(req, res) {
-  console.log("Receiving push.. Hut.. Hut... Hike!");
+  console.log("Receiving push. Hut.. Hut.. Hike!");
   child = exec(command, function (error, stdout, stderr) {
     console.log(stdout);
   });

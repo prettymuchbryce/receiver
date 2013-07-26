@@ -25,7 +25,7 @@
 6. `forever start receiver/receiver.js`
 
 
-7. Supply this new app to github as a service hook. (Settings -> Service Hooks -> Webhook URLs)
+7. Input receiver as a service hook in your github project. (Settings -> Service Hooks -> Webhook URLs)
 
 	example: http://www.mywebapp.com:3617/gitpush
 
