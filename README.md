@@ -14,7 +14,7 @@
 
 1. ssh into your box
 
-2. `npm install -g forever`
+2. `sudo npm install -g forever`
 
 3. `forever start yourapp.js`
 
