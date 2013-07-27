@@ -5,6 +5,7 @@ var app = express();
 var port = config.port;
 var exec = require('child_process').exec;
 var command = constructCommand();
+var commandToRunWhenFinished = constructDoneCommand();
 var request = require('request');
 
 app.configure(function(){
@@ -35,9 +36,8 @@ function listen(hooks) {
 
     console.log("Receiving push. Hut.. Hut.. Hike!");
     child = exec(command, function (error, stdout, stderr) {
-      console.log(stdout);
       console.log("Touchdown!");
-      console.log("Waiting for git push..");
+      exec(commandToRunWhenFinished);
     });
     res.end("200 OK");
   });
@@ -56,11 +56,16 @@ function constructCommand() {
     }
   }
 
+  command += "echo done";
+
+  return command;
+}
+
+function constructDoneCommand() {
   for (var j = 0; j < config.commandsToRunWhenFinished.length; j++) {
-    command += config.commandsToRunWhenFinished[j];
+    commandToRunWhenFinished += config.commandsToRunWhenFinished[j];
     if (j != config.commandsToRunWhenFinished.length-1) {
-      command += " && ";
+      commandToRunWhenFinished += " && ";
     }
   }
-  return command;
 }
