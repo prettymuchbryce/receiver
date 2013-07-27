@@ -7,7 +7,7 @@
 
 ##What is it ?
 
-Receiver is a simple application that runs continuously on your server. It responds to github post-receive hooks of your project. Receiver responds by updating your projects, and running shell commands of your choice afterwards. See config.json to get an idea of a simple configuration.
+Receiver is a simple application that runs continuously on your server. It responds to github post-receive hooks of your project(s). Receiver responds by pulling your project(s), and running shell commands of your choice afterwards. See config.json to get an idea of a simple configuration.
 
 ##Is this for me ?
 - You are using github to store your code
