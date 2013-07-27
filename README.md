@@ -1,4 +1,4 @@
-> A simple deployment tool for github built with node.js
+> A simple deployment tool for github projects.
 
 
 ![](http://i.imgur.com/3D1ou4b.jpg)
