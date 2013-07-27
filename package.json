@@ -1,9 +1,9 @@
 {
   "name": "receiver",
   "version": "0.0.1",
-  "description": "A simple deployment tool that sits on your server and keeps your repositories up to date.",
-  "main": "app.js",
-  "repository": "github.com/prettymuchbryce/receiver",
+  "description": "A simple and configurable deployment tool for github projects.",
+  "main": "receiver.js",
+  "repository": "https://github.com/prettymuchbryce/receiver.git",
   "author": "Bryce Neal",
   "license": "MIT",
   "dependencies": {
