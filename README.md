@@ -1,4 +1,4 @@
-> A simple deployment tool that sits on your server and keeps your repositories up to date.
+> A simple deployment tool for github built with node.js
 
 
 ![](http://i.imgur.com/3D1ou4b.jpg)
@@ -8,7 +8,7 @@
 ##Is this for me ?
 - You are using github to store your code
 - You have a server somewhere that hosts your project
-- You would like to push to github, and see the changes live on your server
+- You would like to push to github to deploy code to your server
 
 ##Instructions using forever
 
@@ -17,6 +17,7 @@
 2. `sudo npm install -g forever`
 
 3. `git clone  http://www.github.com/you/yourapp`
+	_note: If your repository is private, ensure you have associated your server's SSH key with your github account. See: https://help.github.com/articles/generating-ssh-keys_
 
 4. `forever start yourapp/yourapp.js`
 
@@ -28,11 +29,11 @@
 
 8. `npm install`
 
-9. `forever start receiver/receiver.js`
+9. `forever start receiver.js`
 
 10. Input receiver as a service hook in your github project. (Settings -> Service Hooks -> Webhook URLs)
 
-	example: http://www.mywebapp.com:3617/gitpush
+	example: http://www.mywebapp.com:3617/githook
 
 
 11. Push to github to deploy.

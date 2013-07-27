@@ -2,6 +2,6 @@
 	"endpoint": "/githook",
 	"directoriesToPull": ["~/mywebapp"],
 	"commandsToRunAfterPull": ["npm install"],
-	"commandsToRunWhenFinished": ["forever restartall"]
+	"commandsToRunWhenFinished": ["forever restartall"],
 	"port": 3617
 }
