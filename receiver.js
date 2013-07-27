@@ -36,6 +36,8 @@ function listen(hooks) {
     console.log("Receiving push. Hut.. Hut.. Hike!");
     child = exec(command, function (error, stdout, stderr) {
       console.log(stdout);
+      console.log("Touchdown!");
+      console.log("Waiting for git push..");
     });
     res.end("200 OK");
   });
@@ -48,14 +50,15 @@ function constructCommand() {
   var command = "";
 
   for (var i = 0; i < config.directoriesToPull.length; i++) {
-    command += "cd " + config.directoriesToPull[i] + " && ";
+    command += "cd " + config.directoriesToPull[i] + " && git pull && ";
+    for (var j = 0; j < config.commandsToRunAfterPull.length; j++) {
+      command += config.commandsToRunAfterPull[j] + " && ";
+    }
   }
 
-  command += "git pull && ";
-
-  for (var j = 0; j < config.commandsToRunAfterPull.length; j++) {
-    command += config.commandsToRunAfterPull[j];
-    if (j != config.commandsToRunAfterPull.length-1) {
+  for (var j = 0; j < config.commandsToRunWhenFinished.length; j++) {
+    command += config.commandsToRunWhenFinished[j];
+    if (j != config.commandsToRunWhenFinished.length-1) {
       command += " && ";
     }
   }
