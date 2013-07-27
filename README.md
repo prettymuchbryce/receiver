@@ -1,4 +1,4 @@
-> A simple deployment tool for github projects.
+> A simple and configurable deployment tool for github projects.
 
 
 ![](http://i.imgur.com/3D1ou4b.jpg)
@@ -10,7 +10,7 @@
 - You have a server somewhere that hosts your project
 - You would like to push to github to deploy code to your server
 
-##Instructions using forever
+##Simple deployment tool using forever
 
 1. ssh into your box
 
