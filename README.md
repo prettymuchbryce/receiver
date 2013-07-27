@@ -10,7 +10,7 @@
 - You have a server somewhere that hosts your project
 - You would like to push to github to deploy code to your server
 
-##Simple deployment tool using forever
+##Simple deployment tool using [forever](https://github.com/nodejitsu/forever)
 
 1. ssh into your box
 
