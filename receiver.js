@@ -1,29 +1,11 @@
-var GITHUB_IPS = 
-  ["204.232.175.64", 
-  "204.232.175.27", 
-  "192.30.252.0", 
-  "192.30.252.22"];
-
+var rangeCheck = require('range_check');
 var config = require(__dirname + '/config.json');
 var express = require('express');
 var app = express();
 var port = config.port;
 var exec = require('child_process').exec;
 var command = constructCommand();
-
-app.post(config.endpoint, function(req, res) {
-
-  if (GITHUB_IPS.indexOf(req.connection.remoteAddress) == -1) {
-    console.log("Bad IP");
-    return;
-  }
-
-  console.log("Receiving push. Hut.. Hut.. Hike!");
-  child = exec(command, function (error, stdout, stderr) {
-    console.log(stdout);
-  });
-  res.end("200 OK");
-});
+var request = require('request');
 
 app.configure(function(){
   app.use(express.methodOverride());
@@ -35,8 +17,32 @@ app.configure(function(){
   app.use(app.router);
 });
 
-app.listen(port);
-console.log("Waiting for git push..");
+//Get github hook ips
+request('https://api.github.com/meta', function (error, response, body) {
+  if (!error && response.statusCode == 200) {
+    var json = JSON.parse(body);
+    listen(json.hooks);
+  }
+});
+
+//start listening
+function listen(hooks) {
+    app.post(config.endpoint, function(req, res) {
+    if (!rangeCheck.in_range(req.connection.remoteAddress, hooks)) {
+      res.end("500 Bad Request");
+      return;
+    }
+
+    console.log("Receiving push. Hut.. Hut.. Hike!");
+    child = exec(command, function (error, stdout, stderr) {
+      console.log(stdout);
+    });
+    res.end("200 OK");
+  });
+
+  app.listen(port);
+  console.log("Waiting for git push..");
+}
 
 function constructCommand() {
   var command = "";

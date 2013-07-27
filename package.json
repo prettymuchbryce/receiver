@@ -7,6 +7,8 @@
   "author": "Bryce Neal",
   "license": "MIT",
   "dependencies": {
-    "express": "~3.2.6"
+    "express": "~3.2.6",
+    "range_check": "0.0.4",
+    "request": "~2.25.0"
   }
 }
