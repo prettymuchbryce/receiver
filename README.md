@@ -20,12 +20,12 @@ Receiver is a simple application that runs continuously on your server. It respo
 
 2. `sudo npm install -g forever`
 
-3. `git clone  http://www.github.com/you/yourapp`
+3. `git clone git@github.com:you/yourapp.git`
 	_note: If your repository is private, ensure you have associated your server's SSH key with your github account. See: https://help.github.com/articles/generating-ssh-keys_
 
 4. `forever start yourapp/yourapp.js`
 
-5. `git clone http://www.github.com/prettymuchbryce/receiver`
+5. `git clone git@github.com:prettymuchbryce/receiver.git`
 
 6. `cd receiver`
 
@@ -35,9 +35,9 @@ Receiver is a simple application that runs continuously on your server. It respo
 
 9. `forever start receiver.js`
 
-10. Input receiver as a service hook in your github project. (Settings -> Service Hooks -> Webhook URLs)
+10. Specify receiver as a service hook in your github project. (Settings -> Service Hooks -> Webhook URLs)
 
-	example: http://www.mywebapp.com:3617/githook
+	example: http://www.yourapp.com:3617/githook
 
 
 11. Push to github to deploy.
