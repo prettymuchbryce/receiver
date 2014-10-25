@@ -8,64 +8,71 @@ var command = constructCommand();
 var commandToRunWhenFinished = constructDoneCommand();
 var request = require('request');
 
-app.configure(function(){
-  app.use(express.methodOverride());
-  app.use(express.bodyParser());
-  app.use(express.errorHandler({
+app.use(express.methodOverride());
+app.use(express.bodyParser());
+app.use(express.errorHandler({
     dumpExceptions: true, 
     showStack: true
-  }));
-  app.use(app.router);
-});
+}));
+app.use(app.router);
+
+var options = {
+    url: 'https://api.github.com/meta',
+    headers: {
+        "User-Agent": "node.js"
+    }
+}
 
 //Get github hook ips
-request('https://api.github.com/meta', function (error, response, body) {
-  if (!error && response.statusCode == 200) {
-    var json = JSON.parse(body);
-    listen(json.hooks);
-  }
+request(options, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+        var json = JSON.parse(body);
+        listen(json.hooks);
+    } else {
+        console.error(error,response)
+    }
 });
 
 //start listening
 function listen(hooks) {
     app.post(config.endpoint, function(req, res) {
     if (!rangeCheck.in_range(req.connection.remoteAddress, hooks)) {
-      res.end("500 Bad Request");
-      return;
+        res.end("500 Bad Request");
+        return;
     }
 
-    console.log("Receiving push. Hut.. Hut.. Hike!");
+    console.log("Receiving push...");
     child = exec(command, function (error, stdout, stderr) {
-      console.log("Touchdown!");
-      exec(commandToRunWhenFinished);
+        console.log("Push receieved!");
+        exec(commandToRunWhenFinished);
     });
-    res.end("200 OK");
-  });
+        res.end("200 OK");
+    });
 
-  app.listen(port);
-  console.log("Waiting for git push..");
+    app.listen(port);
+    console.log("Waiting for git push..");
 }
 
 function constructCommand() {
-  var command = "";
+    var command = "";
 
-  for (var i = 0; i < config.directoriesToPull.length; i++) {
-    command += "cd " + config.directoriesToPull[i] + " && git pull origin master && ";
-    for (var j = 0; j < config.commandsToRunAfterPull.length; j++) {
-      command += config.commandsToRunAfterPull[j] + " && ";
+    for (var i = 0; i < config.directoriesToPull.length; i++) {
+        command += "cd " + config.directoriesToPull[i] + " && git pull origin master && ";
+        for (var j = 0; j < config.commandsToRunAfterPull.length; j++) {
+            command += config.commandsToRunAfterPull[j] + " && ";
+        }
     }
-  }
 
-  command += "echo done";
+    command += "echo done";
 
-  return command;
+    return command;
 }
 
 function constructDoneCommand() {
-  for (var j = 0; j < config.commandsToRunWhenFinished.length; j++) {
-    commandToRunWhenFinished += config.commandsToRunWhenFinished[j];
-    if (j != config.commandsToRunWhenFinished.length-1) {
-      commandToRunWhenFinished += " && ";
+    for (var j = 0; j < config.commandsToRunWhenFinished.length; j++) {
+        commandToRunWhenFinished += config.commandsToRunWhenFinished[j];
+        if (j != config.commandsToRunWhenFinished.length-1) {
+            commandToRunWhenFinished += " && ";
+        }
     }
-  }
 }
