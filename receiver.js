@@ -38,7 +38,7 @@ function listen(hooks) {
     app.post(config.endpoint, function(req, res) {
 
     if (config.isBehindProxy) {
-        var remoteIp = request.headers['X-Forwarded-For'];
+        var remoteIp = req.headers['X-Forwarded-For'];
     } else {
         var remoteIp = req.connection.remoteAddress;
     }
