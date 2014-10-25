@@ -36,7 +36,14 @@ request(options, function (error, response, body) {
 //start listening
 function listen(hooks) {
     app.post(config.endpoint, function(req, res) {
-    if (!rangeCheck.in_range(req.connection.remoteAddress, hooks)) {
+
+    if (config.isBehindProxy) {
+        var remoteIp = request.headers['X-Forwarded-For'];
+    } else {
+        var remoteIp = req.connection.remoteAddress;
+    }
+
+    if (!rangeCheck.in_range(remoteIp, hooks)) {
         res.send(400,"bad request");
         return;
     }
@@ -46,7 +53,7 @@ function listen(hooks) {
         console.log("Push receieved!");
         exec(commandToRunWhenFinished);
     });
-        res.end("200 OK");
+        res.send(200,"200 OK");
     });
 
     app.listen(port);
