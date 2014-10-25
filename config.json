@@ -3,6 +3,5 @@
 	"directoriesToPull": ["~/mywebapp"],
 	"commandsToRunAfterPull": ["npm install"],
 	"commandsToRunWhenFinished": ["forever restartall"],
-	"port": 3617,
-    "isBehindProxy": false
+	"port": 3617
 }

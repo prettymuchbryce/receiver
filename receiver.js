@@ -37,11 +37,7 @@ request(options, function (error, response, body) {
 function listen(hooks) {
     app.post(config.endpoint, function(req, res) {
 
-    if (config.isBehindProxy) {
-        var remoteIp = req.headers['X-Forwarded-For'];
-    } else {
-        var remoteIp = req.connection.remoteAddress;
-    }
+    var remoteIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
     if (!rangeCheck.in_range(remoteIp, hooks)) {
         res.send(400,"bad request");
