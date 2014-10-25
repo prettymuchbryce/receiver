@@ -37,7 +37,7 @@ request(options, function (error, response, body) {
 function listen(hooks) {
     app.post(config.endpoint, function(req, res) {
     if (!rangeCheck.in_range(req.connection.remoteAddress, hooks)) {
-        res.end("500 Bad Request");
+        res.send(400,"bad request");
         return;
     }
 
