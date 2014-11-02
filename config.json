@@ -1,6 +1,9 @@
 {
 	"endpoint": "/githook",
-	"directoriesToPull": ["~/mywebapp"],
+	"directoriesToPull": ["~/mywebapp", "~/myOtherApp"],
+    "projectSpecificCommandsToRunAfterPull": {
+        "~/myOtherApp": ["gulp build"]
+    },
 	"commandsToRunAfterPull": ["npm install"],
 	"commandsToRunWhenFinished": ["forever restartall"],
 	"port": 3617

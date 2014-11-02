@@ -61,6 +61,9 @@ function constructCommand() {
 
     for (var i = 0; i < config.directoriesToPull.length; i++) {
         command += "cd " + config.directoriesToPull[i] + " && git pull origin master && ";
+        for (var k = 0; k < config.projectSpecificCommandsToRunAfterPull.length; k++) {
+            command += config.projectSpecificCommandsToRunAfterPull[config.directoriesToPull[i]] + " && ";
+        }
         for (var j = 0; j < config.commandsToRunAfterPull.length; j++) {
             command += config.commandsToRunAfterPull[j] + " && ";
         }
