@@ -61,8 +61,12 @@ function constructCommand() {
 
     for (var i = 0; i < config.directoriesToPull.length; i++) {
         command += "cd " + config.directoriesToPull[i] + " && git pull origin master && ";
-        for (var k = 0; k < config.projectSpecificCommandsToRunAfterPull.length; k++) {
-            command += config.projectSpecificCommandsToRunAfterPull[config.directoriesToPull[i]] + " && ";
+
+        var localCommands = config.projectSpecificCommandsToRunAfterPull[config.directoriesToPull[i]];
+        if (localCommands.length > 0) {
+            for (var k = 0; k < localCommands.length; k++) {
+                command += localCommands[k] + " && ";
+            }
         }
         for (var j = 0; j < config.commandsToRunAfterPull.length; j++) {
             command += config.commandsToRunAfterPull[j] + " && ";
