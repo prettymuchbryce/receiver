@@ -63,7 +63,7 @@ function constructCommand() {
         command += "cd " + config.directoriesToPull[i] + " && git pull origin master && ";
 
         var localCommands = config.projectSpecificCommandsToRunAfterPull[config.directoriesToPull[i]];
-        if (localCommands.length > 0) {
+        if (localCommands && localCommands.length > 0) {
             for (var k = 0; k < localCommands.length; k++) {
                 command += localCommands[k] + " && ";
             }
