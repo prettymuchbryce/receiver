@@ -47,6 +47,7 @@ function listen(hooks) {
     console.log("Receiving push...");
     child = exec(command, function (error, stdout, stderr) {
         console.log("Push receieved!");
+        console.log("executing: " + command);
         exec(commandToRunWhenFinished);
     });
         res.send(200,"200 OK");
