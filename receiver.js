@@ -61,22 +61,21 @@ function constructCommand() {
     var command = "";
 
     for (var i = 0; i < config.directoriesToPull.length; i++) {
-        command += "cd " + config.directoriesToPull[i] + " && git pull origin master && ";
+        command += "cd " + config.directoriesToPull[i] + " ; git pull origin master ; ";
 
         var localCommands = config.projectSpecificCommandsToRunAfterPull[config.directoriesToPull[i]];
         if (localCommands && localCommands.length > 0) {
             for (var k = 0; k < localCommands.length; k++) {
-                command += localCommands[k] + " && ";
+                command += localCommands[k] + " ; ";
             }
         }
         if (config.commandsToRunAfterPull) {
             for (var j = 0; j < config.commandsToRunAfterPull.length; j++) {
-                command += config.commandsToRunAfterPull[j] + " && ";
+                command += config.commandsToRunAfterPull[j] + " ; ";
             }
         }
     }
 
-    command = "echo executing: " + command + " && " + command;
     command += "echo done";
 
     return command;
@@ -87,7 +86,7 @@ function constructDoneCommand() {
         for (var j = 0; j < config.commandsToRunWhenFinished.length; j++) {
             commandToRunWhenFinished += config.commandsToRunWhenFinished[j];
             if (j != config.commandsToRunWhenFinished.length-1) {
-                commandToRunWhenFinished += " && ";
+                commandToRunWhenFinished += " ; ";
             }
         }
     }
