@@ -75,6 +75,7 @@ function constructCommand() {
         }
     }
 
+    command = "echo executing: " + command + " && " + command;
     command += "echo done";
 
     return command;
