@@ -68,8 +68,10 @@ function constructCommand() {
                 command += localCommands[k] + " && ";
             }
         }
-        for (var j = 0; j < config.commandsToRunAfterPull.length; j++) {
-            command += config.commandsToRunAfterPull[j] + " && ";
+        if (config.commandsToRunAfterPull) {
+            for (var j = 0; j < config.commandsToRunAfterPull.length; j++) {
+                command += config.commandsToRunAfterPull[j] + " && ";
+            }
         }
     }
 
@@ -79,10 +81,12 @@ function constructCommand() {
 }
 
 function constructDoneCommand() {
-    for (var j = 0; j < config.commandsToRunWhenFinished.length; j++) {
-        commandToRunWhenFinished += config.commandsToRunWhenFinished[j];
-        if (j != config.commandsToRunWhenFinished.length-1) {
-            commandToRunWhenFinished += " && ";
+    if (config.commandsToRunWhenFinished) {
+        for (var j = 0; j < config.commandsToRunWhenFinished.length; j++) {
+            commandToRunWhenFinished += config.commandsToRunWhenFinished[j];
+            if (j != config.commandsToRunWhenFinished.length-1) {
+                commandToRunWhenFinished += " && ";
+            }
         }
     }
 }
